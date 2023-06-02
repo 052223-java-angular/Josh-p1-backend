@@ -1,4 +1,4 @@
-# P1 - Solo Programming ---- Project
+# P1 - Solo Programming Movie Search Project
 
 ## Introduction
 
