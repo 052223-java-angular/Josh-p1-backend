@@ -26,3 +26,8 @@ replay_pid*
 *.settings/
 *.classpath
 *.project
+
+*.idea
+*target/
+*.properties
+*.DS_Store
