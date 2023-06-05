@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This is a Spring boot and Angular movie/actor search full stack application. The application will be primarily built using Java and will utilize a PostgreSQL database to store product and user information.
+This is a Spring boot and Angular movie/actor search full stack application. Users can search for movies and add them to a watchlist or to their watch history.
+The application will be primarily built using Java and will utilize a PostgreSQL database to store product and user information.
 
 ## User Stories
 
