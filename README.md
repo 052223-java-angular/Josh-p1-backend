@@ -25,10 +25,11 @@ The application will be primarily built using Java and will utilize a PostgreSQL
 - Modifying the watch list
 - Watch history
 - Movie rating and reviewing
+- recommendation system
+- filter top rated or most viewed
 
 ## Stretch Goals
 
-- Implementing a recommendation system based on user's previous view
 - Implementing a random movie selection.
 - Implementing a random movie selection based of an actor name or keyword.
 
