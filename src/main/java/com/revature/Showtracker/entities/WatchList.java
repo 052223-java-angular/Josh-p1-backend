@@ -1,6 +1,5 @@
 package com.revature.Showtracker.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +30,16 @@ public class WatchList {
     )
     private Set<Movie> unwatchedMovies;
 
+    public WatchList(String id, User user) {
+        this.id = id;
+        this.user = user;
+    }
+
+    public void addMovie(Movie movie) {
+        this.unwatchedMovies.add(movie);
+    }
+
+    public void removeMovie(Movie movie){
+        this.unwatchedMovies.remove(movie);
+    }
 }

@@ -9,8 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewLoginRequest {
-    private String username;
-    private String password;
-    private String token;
+public class NewReviewRequest {
+    private String id;
+    private String imdbId;
+    private String comment;
+
 }

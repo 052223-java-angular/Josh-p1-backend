@@ -3,6 +3,7 @@ package com.revature.Showtracker.controllers;
 import com.revature.Showtracker.dtos.request.NewUserRequest;
 import com.revature.Showtracker.dtos.request.NewLoginRequest;
 import com.revature.Showtracker.dtos.response.Principal;
+import com.revature.Showtracker.services.JwtTokenService;
 import com.revature.Showtracker.services.UserService;
 import com.revature.Showtracker.utils.custom_exceptions.ResourceConflictException;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
+    private final JwtTokenService jwtTokenService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody NewUserRequest request) {
@@ -46,9 +49,10 @@ public class AuthController {
         //call login method with userService
         Principal principal = userService.login(request);
         //jwt token creation
-
+        String token = jwtTokenService.generateToken(principal);
+        principal.setToken(token);
         //return OK and the principle object on login
-            return ResponseEntity.status(HttpStatus.OK).body(principal);
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 
 }

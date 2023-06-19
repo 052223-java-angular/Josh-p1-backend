@@ -24,6 +24,7 @@ public class WatchHistory {
     private User user;
 
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
             name = "watch_histories_movies",
             joinColumns = @JoinColumn(name = "watch_histories_id"),
@@ -31,4 +32,16 @@ public class WatchHistory {
     )
     private Set<Movie> watchedMovies;
 
+    public WatchHistory(String id, User user) {
+        this.id = id;
+        this.user = user;
+    }
+
+    public void addMovie(Movie movie) {
+        this.watchedMovies.add(movie);
+    }
+
+    public void removeMovie(Movie movie){
+        this.watchedMovies.remove(movie);
+    }
 }

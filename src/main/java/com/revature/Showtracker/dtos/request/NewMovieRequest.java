@@ -9,8 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewLoginRequest {
-    private String username;
-    private String password;
+public class NewMovieRequest {
+    private String movieId;
     private String token;
 }

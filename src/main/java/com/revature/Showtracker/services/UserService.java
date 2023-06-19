@@ -5,17 +5,24 @@ import com.revature.Showtracker.dtos.request.NewLoginRequest;
 import com.revature.Showtracker.dtos.response.Principal;
 import com.revature.Showtracker.entities.User;
 import com.revature.Showtracker.repositories.UserRepository;
+import com.revature.Showtracker.repositories.WatchHistoryRepository;
+import com.revature.Showtracker.repositories.WatchListRepository;
 import com.revature.Showtracker.utils.custom_exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    //private final WatchHistoryService watchHistoryService;
+    private final WatchListRepository watchListRepository;
+    //private final WatchListService watchListService;
+    private final WatchHistoryRepository watchHistoryRepository;
 
     public boolean isUniqueUsername(String username) {
         Optional<User> userOpt = userRepository.findByUsername(username);
@@ -40,7 +47,14 @@ public class UserService {
         //create new user
         User newUser = new User(request.getUsername(), hash);
         //save user
-        return userRepository.save(newUser);
+        userRepository.save(newUser);
+        //create empty watchlist
+        watchHistoryRepository.saveNew(String.valueOf(UUID.randomUUID()), newUser.getId());
+        //watchListService.createList(newUser);
+        //create empty watch history
+        watchHistoryRepository.saveNew(String.valueOf(UUID.randomUUID()), newUser.getId());
+        //return user
+        return newUser;
     }
 
     public Principal login (NewLoginRequest request) {
