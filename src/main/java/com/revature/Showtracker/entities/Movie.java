@@ -1,11 +1,15 @@
 package com.revature.Showtracker.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Reference;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -17,39 +21,24 @@ import java.util.Set;
 public class Movie {
     @Id
     private String id;
+    private String imdbId;
     private String title;
-    private int rating;
-    private int year;
-    private int season;
-    private int episode;
+    private String releaseDate;
+    private String trailerLink;
+    private String poster;
+    private List<String> genres;
+    private List<String> backdrop;
 
-    @ManyToMany(mappedBy = "unwatchedMovies")
+    @ManyToMany(mappedBy = "unwatchedMovies", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<WatchList> watchLists;
 
-    @ManyToMany(mappedBy = "watchedMovies")
+    @ManyToMany(mappedBy = "watchedMovies", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<WatchHistory> watchHistories;
 
-    @ManyToMany
-    @JoinTable(
-            name = "movies_actors",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
-    private Set<Actor> actors;
+    @OneToMany
+    @JsonManagedReference
+    private Set<Review> review;
 
-    @ManyToMany
-    @JoinTable(
-            name = "movies_genres",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
-    private Set<Genre> genres;
-
-    @ManyToMany
-    @JoinTable(
-            name = "movies_keywords",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "keyword_id")
-    )
-    private Set<Keyword> keywords;
 }
