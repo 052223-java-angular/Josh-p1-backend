@@ -26,14 +26,14 @@ public class WatchListController {
     }
 
     //add movie to watch history
-    @PostMapping("/{userId}/watchlist/add/{id}")
+    @PostMapping("/{userId}/add/{id}")
     public ResponseEntity<?> addMovie (@PathVariable String userId, @PathVariable("id") String id) {
         watchListService.addMovie(userId, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //remove item from watch history
-    @DeleteMapping("/{userId}/watchlist/delete/{id}")
+    @DeleteMapping("/{userId}/delete/{id}")
     public  ResponseEntity<?> removeMovie(@PathVariable String userId, @PathVariable String id) {
         watchListService.removeMovie(userId, id);
         return ResponseEntity.status(HttpStatus.OK).build();
