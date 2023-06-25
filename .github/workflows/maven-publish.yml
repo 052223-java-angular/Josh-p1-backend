@@ -45,7 +45,7 @@ jobs:
         # The name of your Elastic Beanstalk application
         application_name: ShowTracker
         # The name of your Elastic Beanstalk environment
-        environment_name: ShowTracker-env
+        environment_name: ShowTracker-env-1
         # A unique version label for the deployment
         version_label: version-${{github.run_number}}
         # The AWS region your Elastic Beanstalk application is hosted in
