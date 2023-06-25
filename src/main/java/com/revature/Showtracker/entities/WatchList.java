@@ -25,8 +25,8 @@ public class WatchList {
     @ManyToMany
     @JoinTable(
             name = "watch_lists_movies",
-            joinColumns = @JoinColumn(name = "watch_lists_id"),
-            inverseJoinColumns = @JoinColumn(name = "movies_id")
+            joinColumns = @JoinColumn(name = "watch_lists_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "movies_id", referencedColumnName = "id")
     )
     private Set<Movie> unwatchedMovies;
 

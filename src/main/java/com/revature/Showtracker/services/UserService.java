@@ -19,10 +19,9 @@ import java.util.UUID;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    //private final WatchHistoryService watchHistoryService;
-    private final WatchListRepository watchListRepository;
-    //private final WatchListService watchListService;
-    private final WatchHistoryRepository watchHistoryRepository;
+    private final WatchHistoryService watchHistoryService;
+
+    private final WatchListService watchListService;
 
     public boolean isUniqueUsername(String username) {
         Optional<User> userOpt = userRepository.findByUsername(username);
@@ -49,10 +48,10 @@ public class UserService {
         //save user
         userRepository.save(newUser);
         //create empty watchlist
-        watchHistoryRepository.saveNew(String.valueOf(UUID.randomUUID()), newUser.getId());
+        watchHistoryService.createHistory(newUser);
         //watchListService.createList(newUser);
         //create empty watch history
-        watchHistoryRepository.saveNew(String.valueOf(UUID.randomUUID()), newUser.getId());
+        watchHistoryService.createHistory(newUser);
         //return user
         return newUser;
     }
