@@ -11,9 +11,7 @@ import java.util.List;
 public interface WatchListRepository extends JpaRepository<WatchList, String> {
     List<Movie> findAllById(String id);
 
-    void saveNew (String id, String user_id);
+    void update(String userid, String imdbId);
 
-    void save(String user_id, String imdbId);
-
-    void delete(String user_id, String imdbId);
+    void delete(String userid, String imdbId);
 }

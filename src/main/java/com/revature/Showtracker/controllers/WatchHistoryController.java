@@ -19,23 +19,23 @@ public class WatchHistoryController {
     private final JwtTokenService jwtTokenService;
 
     //view watch history
-    @PostMapping("/view")
+    @GetMapping("/view")
     public ResponseEntity<List<Movie>> viewAll(@RequestBody NewWatchHistoryRequest request) {
         List<Movie> movieList = watchHistoryService.allMovies(request);
         return ResponseEntity.status(HttpStatus.OK).body(movieList);
     }
 
     //add movie to watch history
-    @PutMapping("/add")
-    public ResponseEntity<?> addMovie (@RequestBody NewWatchHistoryRequest request, Movie movie) {
-        watchHistoryService.addMovie(request, movie);
+    @PutMapping("/{userId}/watchhistory/add/{movieId}")
+    public ResponseEntity<?> addMovie(@PathVariable String userId, @PathVariable String id) {
+        watchHistoryService.addMovie(userId, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //remove item from watch history
-    @DeleteMapping("/delete")
-    public  ResponseEntity<?> removeMovie(@RequestBody NewWatchHistoryRequest request, Movie movie) {
-        watchHistoryService.removeMovie(request, movie);
+    @DeleteMapping("/{userId}/watchhistory/delete/{movieId}")
+    public  ResponseEntity<?> removeMovie(@PathVariable String userId, @PathVariable String id) {
+        watchHistoryService.removeMovie(userId, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

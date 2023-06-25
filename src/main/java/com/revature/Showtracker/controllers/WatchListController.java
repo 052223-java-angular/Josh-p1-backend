@@ -7,7 +7,11 @@ import com.revature.Showtracker.services.WatchListService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -26,16 +30,16 @@ public class WatchListController {
     }
 
     //add movie to watch history
-    @PutMapping("/add")
-    public ResponseEntity<?> addMovie (@RequestBody NewWatchListRequest request, Movie movie) {
-        watchListService.addMovie(request, movie);
+    @PostMapping("/{userId}/watchlist/add/{movieId}")
+    public ResponseEntity<?> addMovie (@PathVariable String userId, @PathVariable String id) {
+        watchListService.addMovie(userId, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //remove item from watch history
-    @DeleteMapping("/delete")
-    public  ResponseEntity<?> removeMovie(@RequestBody NewWatchListRequest request, Movie movie) {
-        watchListService.removeMovie(request, movie);
+    @DeleteMapping("/{userId}/watchlist/delete/{movieId}")
+    public  ResponseEntity<?> removeMovie(@PathVariable String userId, @PathVariable String id) {
+        watchListService.removeMovie(userId, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
