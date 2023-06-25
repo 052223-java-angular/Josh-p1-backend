@@ -19,15 +19,14 @@ public class ReviewService {
         Review review = new Review();
         review.setId(UUID.randomUUID());
         review.setComment(request.getComment());
-        review.setImdbId(request.getImdbId());
 
         reviewRepository.save(review);
         return review;
     }
 
-    public List<Review> findByImdbId(String imdbId) {
-        List<Review> reviews = new ArrayList<>();
+    public List<Review> findById(String id) {
+        List<Review> reviews = reviewRepository.findByMovieId(id);
 
-        return reviewRepository.findByImdbId(imdbId);
+        return reviews;
     }
 }

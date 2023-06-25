@@ -1,7 +1,5 @@
 package com.revature.Showtracker.controllers;
 
-
-import com.revature.Showtracker.dtos.request.NewMovieRequest;
 import com.revature.Showtracker.dtos.request.NewWatchHistoryRequest;
 import com.revature.Showtracker.entities.Movie;
 import com.revature.Showtracker.services.JwtTokenService;
@@ -28,7 +26,7 @@ public class WatchHistoryController {
     }
 
     //add movie to watch history
-    @PostMapping("/add")
+    @PutMapping("/add")
     public ResponseEntity<?> addMovie (@RequestBody NewWatchHistoryRequest request, Movie movie) {
         watchHistoryService.addMovie(request, movie);
         return ResponseEntity.status(HttpStatus.CREATED).build();

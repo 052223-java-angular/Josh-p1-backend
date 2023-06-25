@@ -7,15 +7,13 @@ import com.revature.Showtracker.services.WatchListService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
-@Controller
+@RestController
+@RequestMapping("/watchlist")
 public class WatchListController {
     private final WatchListService watchListService;
     private final JwtTokenService jwtTokenService;
@@ -28,7 +26,7 @@ public class WatchListController {
     }
 
     //add movie to watch history
-    @PostMapping("/add")
+    @PutMapping("/add")
     public ResponseEntity<?> addMovie (@RequestBody NewWatchListRequest request, Movie movie) {
         watchListService.addMovie(request, movie);
         return ResponseEntity.status(HttpStatus.CREATED).build();
