@@ -11,9 +11,4 @@ import java.util.List;
 public interface WatchHistoryRepository extends JpaRepository<WatchHistory, String> {
     List<Movie> findAllById(String id);
 
-    void saveNew(String id, String user_id);
-
-    void save(String user_id, String imdbId);
-
-    void delete(String user_id, String imdbId);
 }

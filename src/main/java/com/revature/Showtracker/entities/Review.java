@@ -19,7 +19,6 @@ public class Review {
 
     @Id
     private UUID id;
-    private String imdbId;
     private String comment;
 
     public Review(String comment) {
