@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/movies")
@@ -24,8 +22,8 @@ public class ReviewController {
     }
 
     @GetMapping("/{imdbId}")
-    public ResponseEntity<List<Review>> findByImdb(@PathVariable String imdbId ) {
-        List<Review> reviews = reviewService.findByImdbId(imdbId);
+    public ResponseEntity<List<Review>> findByImdb(@PathVariable String id ) {
+        List<Review> reviews = reviewService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(reviews);
     }
 }

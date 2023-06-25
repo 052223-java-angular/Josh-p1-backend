@@ -1,7 +1,5 @@
 package com.revature.Showtracker.controllers;
 
-
-import com.revature.Showtracker.dtos.request.NewMovieRequest;
 import com.revature.Showtracker.dtos.request.NewWatchHistoryRequest;
 import com.revature.Showtracker.entities.Movie;
 import com.revature.Showtracker.services.JwtTokenService;

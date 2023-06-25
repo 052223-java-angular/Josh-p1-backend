@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @AllArgsConstructor
-@Controller
+@RestController
+@RequestMapping("/watchlist")
 public class WatchListController {
     private final WatchListService watchListService;
     private final JwtTokenService jwtTokenService;
