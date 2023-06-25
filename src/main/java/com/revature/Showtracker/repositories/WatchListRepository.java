@@ -10,8 +10,4 @@ import java.util.List;
 @Repository
 public interface WatchListRepository extends JpaRepository<WatchList, String> {
     List<Movie> findAllById(String id);
-
-    void update(String userid, String imdbId);
-
-    void delete(String userid, String imdbId);
 }
