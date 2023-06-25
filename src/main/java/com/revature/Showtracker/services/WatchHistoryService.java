@@ -5,28 +5,28 @@ import com.revature.Showtracker.entities.Movie;
 import com.revature.Showtracker.entities.User;
 import com.revature.Showtracker.entities.WatchHistory;
 import com.revature.Showtracker.repositories.MovieRepository;
+import com.revature.Showtracker.repositories.UserRepository;
 import com.revature.Showtracker.repositories.WatchHistoryRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class WatchHistoryService {
     private final WatchHistoryRepository watchHistoryRepository;
     private final MovieRepository movieRepository;
+    private final UserRepository userRepository;
     private final JwtTokenService jwtTokenService;
 
     //create list
-    public void createHistory (User user) {
+    public WatchHistory createHistory (User user) {
         WatchHistory history = new WatchHistory( String.valueOf(UUID.randomUUID()), user);
-        //persist to database
-        //watchHistoryRepository.save(String.valueOf(UUID.randomUUID()), user.getId());
         watchHistoryRepository.save(history);
+        return history;
     }
 
     //display list
@@ -36,18 +36,36 @@ public class WatchHistoryService {
     }
     //add to list
     public void addMovie( String userId, String id) {
-        Set<Movie> historySet = null;
-        WatchHistory history = watchHistoryRepository.findById(userId).get();
-        Movie movie = movieRepository.findById(id).get();
-        historySet = history.getWatchedMovies();
-        historySet.add(movie);
-        history.setWatchedMovies(historySet);
+        Set<Movie> movieSet;
+
+        Optional<WatchHistory> historyOpt = watchHistoryRepository.findByUserID(userId);
+        WatchHistory history = historyOpt.get();
+
+        if( !historyOpt.isPresent() ) {
+            User user = userRepository.findById(userId).get();
+            WatchHistory newHistory = createHistory(user);
+            watchHistoryRepository.save(newHistory);
+            history = newHistory;
+        }
+
+        Optional<Movie> movieOpt = movieRepository.findById(id);
+        Movie movie = movieOpt.get();
+        if( !movieOpt.isPresent()) {
+            Movie newMovie = new Movie(id);
+            movieRepository.save(newMovie);
+            movie = newMovie;
+        }
+
+        movieSet = history.getWatchedMovies();
+        movieSet.add(movie);
+        history.setWatchedMovies(movieSet);
+
         watchHistoryRepository.save(history);
     }
 
     //remove from list
     public  void removeMovie(String userId, String id) {
-        Set<Movie> historySet = null;
+        Set<Movie> historySet;
         WatchHistory history = watchHistoryRepository.findById(userId).get();
         Movie movie = movieRepository.findById(id).get();
         historySet = history.getWatchedMovies();

@@ -32,4 +32,6 @@ public class Movie {
     @JsonManagedReference
     private Set<Review> review;
 
+    public Movie(String id) {
+    }
 }
