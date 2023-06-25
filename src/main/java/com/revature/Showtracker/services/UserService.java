@@ -4,16 +4,13 @@ import com.revature.Showtracker.dtos.request.NewUserRequest;
 import com.revature.Showtracker.dtos.request.NewLoginRequest;
 import com.revature.Showtracker.dtos.response.Principal;
 import com.revature.Showtracker.entities.User;
-import com.revature.Showtracker.repositories.UserRepository;
-import com.revature.Showtracker.repositories.WatchHistoryRepository;
-import com.revature.Showtracker.repositories.WatchListRepository;
+import com.revature.Showtracker.repositories.UserRepository;;
 import com.revature.Showtracker.utils.custom_exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @AllArgsConstructor
 @Service

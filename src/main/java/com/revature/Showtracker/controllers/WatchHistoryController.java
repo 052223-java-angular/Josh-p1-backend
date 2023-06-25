@@ -26,14 +26,14 @@ public class WatchHistoryController {
     }
 
     //add movie to watch history
-    @PutMapping("/{userId}/watchhistory/add/{movieId}")
+    @PutMapping("/{userId}/watchhistory/add/{id}")
     public ResponseEntity<?> addMovie(@PathVariable String userId, @PathVariable String id) {
         watchHistoryService.addMovie(userId, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //remove item from watch history
-    @DeleteMapping("/{userId}/watchhistory/delete/{movieId}")
+    @DeleteMapping("/{userId}/watchhistory/delete/{id}")
     public  ResponseEntity<?> removeMovie(@PathVariable String userId, @PathVariable String id) {
         watchHistoryService.removeMovie(userId, id);
         return ResponseEntity.status(HttpStatus.OK).build();
